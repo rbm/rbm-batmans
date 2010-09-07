@@ -1,0 +1,32 @@
+#!/bin/bash
+if [ $# -lt 2 ]; then
+    echo "Usage: $0 <source> <target>"
+    exit 1
+fi
+
+SOURCE=$1
+TARGET=$2
+
+if [ ! -d "$SOURCE" ]; then
+    echo "Error: Source must be a directory"
+    exit 2
+fi
+
+if [ ! -d "$TARGET" ]; then
+    echo "Error: Target must be a directory"
+    exit 3
+fi
+
+LINKED=0
+for FILE in $( find "$SOURCE" -type f -depth 1 -perm +1 ); do
+    BASEF=$( basename "$FILE" )
+    if [ -e "$TARGET"/"$BASEF" ] || [ -L "$TARGET"/"$BASEF" ]; then
+        echo "Trying to symlink $FILE to $TARGET, but $BASEF exists under target. Skipping..."
+        continue
+    fi
+    ln -s "$FILE" "$TARGET"/"$BASEF"
+    chmod u+x "$TARGET"/"$BASEF"
+    echo "Symlinked $FILE to $TARGET/$BASEF"
+    LINKED=$(($LINKED+1))
+done
+echo "Done. Linked $LINKED items into $TARGET."

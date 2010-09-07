@@ -1,0 +1,20 @@
+#!/bin/bash
+PROJECT=$HOME/Projects/quantcast/main
+if [ -n $1 ]; then
+    PROJECT=$1
+fi
+
+cd $PROJECT/build
+ant job.jar
+if [ $? != 0 ]; then
+    echo "Build failed. Not syncing." 
+    say "Build failed! Not syncing!"
+    exit 1
+fi
+
+# Bowdlerized for post-QC public dotfiles, but keeping for future reference.
+echo "Syncing servera..." && rsync -a output/job.jar servera:~/armor/jarStaging/ &
+echo "Syncing serverb..." && rsync -a output/job.jar serverb:~/armor/jarStaging/ &
+wait
+echo "Sync done."
+say "Build succeeded. Sync done."
