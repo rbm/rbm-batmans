@@ -8,9 +8,7 @@ unset PROMPT_COMMAND
 # SHELL VARIABLES
 set -o noclobber
 set -o physical
-shopt -s cdspell
 shopt -s extglob
-shopt -s dotglob
 shopt -s cmdhist
 shopt -s lithist
 shopt -s progcomp
@@ -18,7 +16,6 @@ shopt -s checkhash
 shopt -s histreedit
 shopt -s histappend
 shopt -s promptvars
-shopt -s cdable_vars
 shopt -s checkwinsize
 shopt -s hostcomplete
 shopt -s expand_aliases
@@ -93,7 +90,16 @@ unset   rgb_restore   \
 
 # CUSTOM
 alias ls='ls -h -F'
+export EDITOR=vim
 
-
-source `brew --prefix`/Library/Contributions/brew_bash_completion.sh
+[[ -n `which brew` ]] && source `brew --prefix`/Library/Contributions/brew_bash_completion.sh
 [[ -s $HOME/.pythonbrew/etc/bashrc ]] && source $HOME/.pythonbrew/etc/bashrc
+
+if [ -e $HOME/.screen/session-variables ]; then
+  alias ssh='source $HOME/.screen/session-variables && ssh'
+  alias git='source $HOME/.screen/session-variables && git'
+fi
+
+if [ -e $HOME/scratch.sh ]; then
+  alias screen='$HOME/scratch.sh && screen'
+fi
