@@ -1,0 +1,1 @@
+# ./configure --without-sound --without-xpm --without-gif --without-png --without-rsvg --without-xft --without-gpm --without-dbus --without-gconf --without-gsettings --without-libotf --without-toolkit-scroll-bars --without-xim --without-xaw3d 
