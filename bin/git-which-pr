@@ -1,0 +1,4 @@
+#!/bin/bash
+
+COMMIT=$1
+git log --max-count=1 --pretty="format:%B" `git when-merged $COMMIT | awk '{ print $2; }'` | head -1 | sed -r 's/.*request #([0-9]+) from.*/\1/'
