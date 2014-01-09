@@ -44,9 +44,15 @@ alias grc='git rebase --continue'
 alias rbs='git fetch upstream && git rebase upstream/master'
 export EDITOR=vim
 
+# homebrew - OS X
 [[ -n `which brew` ]] && source `brew --prefix`/Library/Contributions/brew_bash_completion.sh
-[[ -s $HOME/.pythonbrew/etc/bashrc ]] && source $HOME/.pythonbrew/etc/bashrc
 
+# virtualenvwrapper
+if [ -e /usr/local/bin/virtualenvwrapper.sh ]; then
+  source /usr/local/bin/virtualenvwrapper.sh
+fi
+
+# screen SSH agent reconnector
 if [ -e $HOME/.screen/session-variables ]; then
   alias ssh='source $HOME/.screen/session-variables && ssh'
   alias git='source $HOME/.screen/session-variables && git'
