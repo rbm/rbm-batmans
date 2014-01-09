@@ -40,6 +40,8 @@ complete -A command man which whatis sudo info apropos
 
 # CUSTOM
 alias ls='ls -h -F'
+alias grc='git rebase --continue'
+alias rbs='git fetch upstream && git rebase upstream/master'
 export EDITOR=vim
 
 [[ -n `which brew` ]] && source `brew --prefix`/Library/Contributions/brew_bash_completion.sh
