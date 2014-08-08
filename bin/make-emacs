@@ -1,9 +1,9 @@
 #!/bin/bash -e
 mkdir -p $HOME/emacs-build
 cd $HOME/emacs-build
-wget http://mirrors.kernel.org/gnu/emacs/emacs-24.2.tar.bz2
-tar xjf emacs-24.2.tar.bz2
-cd emacs-24.2
+wget http://mirrors.kernel.org/gnu/emacs/emacs-24.3.tar.gz
+tar xzf emacs-24.3.tar.gz
+cd emacs-24.3
 ./configure --without-sound --without-xpm --without-gif --without-png --without-rsvg --without-xft --without-gpm --without-dbus --without-gconf --without-gsettings --without-libotf --without-toolkit-scroll-bars --without-xim --without-xaw3d 
 make
 sudo make install
