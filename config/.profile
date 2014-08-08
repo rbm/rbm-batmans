@@ -1,5 +1,15 @@
-export EDITOR=vim # for config scripts, etc. otherwise: emacs!
-export PATH=$HOME/local/bin:$PATH
-export WORKON_HOME=~/.virtualenvs
+# if running bash
+if [ -n "$BASH_VERSION" ]; then
+    # include .bashrc if it exists
+    if [ -f "$HOME/.bashrc" ]; then
+        . "$HOME/.bashrc"
+    fi
+fi
 
-. ~/.bashrc
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
+WORKON_HOME=~/.virtualenvs
+TERM=xterm-256color

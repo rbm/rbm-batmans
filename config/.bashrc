@@ -1,3 +1,6 @@
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
 declare -x HISTFILE=~/.bash_history
 declare -x HISTCONTROL=ignoreboth
 declare -x HISTFILESIZE=5000
@@ -42,7 +45,6 @@ complete -A command man which whatis sudo info apropos
 alias ls='ls -h -F'
 alias grc='git rebase --continue'
 alias rbs='git fetch upstream && git rebase upstream/master'
-export EDITOR=vim
 
 # homebrew - OS X
 [[ -n `which brew` ]] && source `brew --prefix`/Library/Contributions/brew_bash_completion.sh
@@ -60,4 +62,7 @@ fi
 
 if [ -e $HOME/bin/save-ssh-vars ]; then
   alias screen='$HOME/bin/save-ssh-vars && screen'
+  alias tmux='$HOME/bin/save-ssh-vars && tmux'
 fi
+
+export EDITOR=vim
